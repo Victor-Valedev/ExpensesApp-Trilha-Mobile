@@ -1,18 +1,16 @@
+import 'dart:math';
 import 'package:expensivesapp/components/transactions_forms.dart';
 import 'package:expensivesapp/components/transactions_list.dart';
 import 'package:expensivesapp/models/transactions.dart';
 import 'package:flutter/material.dart';
 
 class TransactionsUsers extends StatefulWidget {
-
-
   @override
   State<TransactionsUsers> createState() => _TransactionsUsersState();
 }
 
 class _TransactionsUsersState extends State<TransactionsUsers> {
-
-    final _transactions = [
+  final _transactions = [
     Transactions(
       id: 't1',
       title: 'Tênis Nike AirForce',
@@ -27,12 +25,25 @@ class _TransactionsUsersState extends State<TransactionsUsers> {
     ),
   ];
 
+  void _addTransactions(String title, double value) {
+    final newTransactions = Transactions(
+      id: Random().nextDouble().toString(),
+      title: title,
+      date: DateTime.now(),
+      value: value,
+    );
+
+    setState(() {
+      _transactions.add(newTransactions);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
-      children:<Widget>[
+      children: <Widget>[
+        TransactionsForms(_addTransactions),
         TransactionsList(transactions: _transactions),
-        TransactionsForms(),
       ],
     );
   }

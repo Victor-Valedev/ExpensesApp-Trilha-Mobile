@@ -4,6 +4,10 @@ class TransactionsForms extends StatelessWidget {
   final titleController = TextEditingController();
   final valueController = TextEditingController();
 
+  final void Function(String, double) onSubmit;
+
+  TransactionsForms(this.onSubmit);
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -22,8 +26,9 @@ class TransactionsForms extends StatelessWidget {
             SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
-                //print(titleController.text);
-                //print(valueController.text);
+                final title = titleController.text;
+                final value = double.tryParse(valueController.text) ?? 0.0;
+                onSubmit(title, value);
               },
               style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
               child: Text(
