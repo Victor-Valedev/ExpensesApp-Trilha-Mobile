@@ -1,3 +1,4 @@
+import 'package:expensivesapp/components/transactions_forms.dart';
 import 'package:expensivesapp/models/transactions.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -12,6 +13,7 @@ class ExpensesApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+  
   final _transactions = [
     Transactions(
       id: 't1',
@@ -32,7 +34,6 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('Despesas Pessoais')),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
@@ -88,6 +89,7 @@ class MyHomePage extends StatelessWidget {
                   );
                 }).toList(),
           ),
+          TransactionsForms()
         ],
       ),
     );
