@@ -28,6 +28,7 @@ class TransactionsForms extends StatelessWidget {
           children: <Widget>[
             TextField(
               controller: titleController,
+              onSubmitted: (_) => _submitForms(),
               decoration: InputDecoration(labelText: 'Título'),
             ),
             TextField(
@@ -38,11 +39,7 @@ class TransactionsForms extends StatelessWidget {
             ),
             SizedBox(height: 10),
             ElevatedButton(
-              onPressed: () {
-                final title = titleController.text;
-                final value = double.tryParse(valueController.text) ?? 0.0;
-                onSubmit(title, value);
-              },
+              onPressed: _submitForms,
               style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
               child: Text(
                 'Nova Transação',
