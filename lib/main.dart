@@ -37,45 +37,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transactions> _transactions = [
-    // Transactions(
-    //   id: 't0',
-    //   title: 'Conta antiga',
-    //   date: DateTime.now().subtract(Duration(days: 33)),
-    //   value: 220.85,
-    // ),
-    Transactions(
-      id: 't1',
-      title: 'Tênis Nike AirForce',
-      date: DateTime.now().subtract(Duration(days: 2)),
-      value: 600.85,
-    ),
-    Transactions(
-      id: 't2',
-      title: 'Macbook M1',
-      date: DateTime.now().subtract(Duration(days:4)),
-      value: 8500.85,
-    ),
-    Transactions(
-      id: 't3',
-      title: 'Cartão',
-      date: DateTime.now(),
-      value: 700.85,
-    ),
-    Transactions(
-      id: 't2',
-      title: 'Aluguel',
-      date: DateTime.now(),
-      value: 900.00,
-    ),
-  ];
+  final List<Transactions> _transactions = [];
 
   List<Transactions> get _recentTransactions {
     return _transactions.where((tr) {
-      return tr.date.isAfter(
-        DateTime.now().subtract(
-          Duration(days: 7),
-        ));
+      return tr.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
     }).toList();
   }
 
