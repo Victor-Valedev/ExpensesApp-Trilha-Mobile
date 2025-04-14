@@ -7,9 +7,27 @@ import 'package:flutter/material.dart';
 void main() => runApp(ExpensesApp());
 
 class ExpensesApp extends StatelessWidget {
+
+  final ThemeData tema = ThemeData(
+    useMaterial3: false,
+    appBarTheme: AppBarTheme(
+      backgroundColor: Colors.blue,
+      foregroundColor: Colors.white
+    ),
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: Colors.blue,
+      primary: Colors.blue,
+    )
+  );
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: MyHomePage());
+    return MaterialApp(
+      debugShowCheckedModeBanner: false, 
+      home: MyHomePage(),
+      theme: tema,
+      )
+    ;
   }
 }
 
