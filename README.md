@@ -1,16 +1,46 @@
-# expensivesapp
+# 📊 App de Finanças Pessoais
 
-A new Flutter project.
+Um aplicativo simples e intuitivo para controle de despesas pessoais, desenvolvido com Flutter no curso Cod3r. Com ele, você pode adicionar suas despesas, visualizar um gráfico semanal em quais dias seus gastos foram maiores e manter o controle da sua vida financeira!
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## ✨ Funcionalidades
 
-A few resources to get you started if this is your first Flutter project:
+- 📅 **Adicionar nova despesa**  
+  Modal para inserir título, valor e data da despesa.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- 🗂 **Lista de despesas**  
+  Visualize todas as despesas adicionadas em forma de cards..
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- ❌ **Excluir despesas**  
+  Remova facilmente qualquer despesa com confirmação por diálogo.
+
+- 📈 **Gráfico semanal**  
+  Veja de forma clara quanto gastou em cada dia da semana.
+
+- 🕒 **Formatação de datas**  
+  Datas organizadas e formatadas para melhor leitura.
+
+---
+
+## 🧪 Tecnologias utilizadas
+
+- Flutter
+- Dart
+- `intl` (para formatação de datas)
+
+---
+
+## 🖼️ 
+
+![image](https://github.com/user-attachments/assets/087650a8-d493-41ff-8392-26dc40c6d410)
+
+
+---
+
+## 🚀 Como rodar
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/Victor-Valedev/ExpensesApp-Trilha-Mobile.git
+
