@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
-  void _addTransactions(String title, double value, DateTime date) {
+  _addTransactions(String title, double value, DateTime date) {
     final newTransactions = Transactions(
       id: Random().nextDouble().toString(),
       title: title,
@@ -58,6 +58,12 @@ class _MyHomePageState extends State<MyHomePage> {
     });
 
     Navigator.of(context).pop();
+  }
+
+  _removeTransaction(String id) {
+    setState(() {
+      _transactions.removeWhere((tr) => tr.id == id);
+    });
   }
 
   _openTransactionFormModal(BuildContext context) {
@@ -86,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Chart(_recentTransactions),
-            TransactionsList(transactions: _transactions),
+            TransactionsList(transactions: _transactions,onRemove: _removeTransaction),
           ],
         ),
       ),
