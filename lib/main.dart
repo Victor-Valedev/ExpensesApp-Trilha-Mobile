@@ -9,6 +9,7 @@ void main() => runApp(ExpensesApp());
 class ExpensesApp extends StatelessWidget {
 
   final ThemeData tema = ThemeData(
+    fontFamily: 'RobotoSlab',
     useMaterial3: false,
     appBarTheme: AppBarTheme(
       backgroundColor: Colors.blue,
