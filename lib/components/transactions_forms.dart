@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class TransactionsForms extends StatefulWidget {
   final void Function(String, double) onSubmit;
@@ -12,6 +13,7 @@ class TransactionsForms extends StatefulWidget {
 class _TransactionsFormsState extends State<TransactionsForms> {
   final _titleController = TextEditingController();
   final _valueController = TextEditingController();
+  DateTime? _selectedDate;
 
   _submitForms() {
     final title = _titleController.text;
@@ -30,7 +32,14 @@ class _TransactionsFormsState extends State<TransactionsForms> {
       initialDate: DateTime.now(),
       firstDate: DateTime(2024),
       lastDate: DateTime.now(),
-    );
+    ).then((pickedDate) {
+      if (pickedDate == null) {
+        return;
+      }
+      setState(() {
+        _selectedDate = pickedDate;
+      });
+    });
   }
 
   @override
@@ -55,7 +64,12 @@ class _TransactionsFormsState extends State<TransactionsForms> {
               height: 70,
               child: Row(
                 children: <Widget>[
-                  Text('Nenhuma data selecionada!'),
+                  Expanded(
+                    child: Text(
+                      _selectedDate == null ? 'Nenhuma data selecionada!'
+                      : 'Data selecionada: ${DateFormat('dd/MM/y').format(_selectedDate!)}'
+                    ),
+                  ),
                   TextButton(
                     child: Text('Selecionar data'),
                     style: TextButton.styleFrom(
