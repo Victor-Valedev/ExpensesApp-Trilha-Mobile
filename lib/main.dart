@@ -38,6 +38,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transactions> _transactions = [];
+  bool _showChart = false;
 
   List<Transactions> get _recentTransactions {
     return _transactions.where((tr) {
@@ -78,18 +79,19 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final appBar = AppBar(
-        title: Text('Despesas Pessoais'),
-        actions: <Widget>[
-          IconButton(
-            onPressed: () => _openTransactionFormModal(context),
-            icon: Icon(Icons.add),
-          ),
-        ],
-      );
-    
-    final availableHeight = MediaQuery.of(context).size.height - 
-    appBar.preferredSize.height - 
-    MediaQuery.of(context).padding.top;
+      title: Text('Despesas Pessoais'),
+      actions: <Widget>[
+        IconButton(
+          onPressed: () => _openTransactionFormModal(context),
+          icon: Icon(Icons.add),
+        ),
+      ],
+    );
+
+    final availableHeight =
+        MediaQuery.of(context).size.height -
+        appBar.preferredSize.height -
+        MediaQuery.of(context).padding.top;
 
     return Scaffold(
       appBar: appBar,
@@ -97,17 +99,33 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              height: availableHeight * 0.3,
-              child: Chart(_recentTransactions)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Exibir gráfico'),
+                Switch(
+                  value: _showChart,
+                  onChanged: (value) {
+                    setState(() {
+                      _showChart = value;
+                    });
+                  },
+                ),
+              ],
             ),
-            Container(
-              height: availableHeight * 0.7,
-              child: TransactionsList(
-                transactions: _transactions,
-                onRemove: _removeTransaction,
+            if (_showChart)
+              Container(
+                height: availableHeight * 0.3,
+                child: Chart(_recentTransactions),
               ),
-            ),
+            if (!_showChart)
+              Container(
+                height: availableHeight * 0.7,
+                child: TransactionsList(
+                  transactions: _transactions,
+                  onRemove: _removeTransaction,
+                ),
+              ),
           ],
         ),
       ),
