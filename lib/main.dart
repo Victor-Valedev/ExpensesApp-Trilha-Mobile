@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 import 'package:expensivesapp/components/chart.dart';
 import 'package:expensivesapp/components/transactions_forms.dart';
@@ -142,10 +143,13 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _openTransactionFormModal(context),
-        child: Icon(Icons.add),
-      ),
+      floatingActionButton:
+          Platform.isIOS
+              ? Container()
+              : FloatingActionButton(
+                onPressed: () => _openTransactionFormModal(context),
+                child: Icon(Icons.add),
+              ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
