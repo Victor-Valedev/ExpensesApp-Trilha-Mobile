@@ -1,7 +1,7 @@
 import 'package:expensivesapp/components/adaptative_button.dart';
+import 'package:expensivesapp/components/adaptative_date_picker.dart';
 import 'package:expensivesapp/components/adaptative_text_fields.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class TransactionsForms extends StatefulWidget {
   final void Function(String, double, DateTime) onSubmit;
@@ -28,22 +28,6 @@ class _TransactionsFormsState extends State<TransactionsForms> {
     widget.onSubmit(title, value, _selectedDate!);
   }
 
-  _showDatePicker() {
-    showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2024),
-      lastDate: DateTime.now(),
-    ).then((pickedDate) {
-      if (pickedDate == null) {
-        return;
-      }
-      setState(() {
-        _selectedDate = pickedDate;
-      });
-    });
-  }
-
   final keyboardTypeNumber = TextInputType.numberWithOptions(decimal: true);
 
   @override
@@ -66,31 +50,18 @@ class _TransactionsFormsState extends State<TransactionsForms> {
                 onSubmitForms: (_) => _submitForms(),
               ),
               AdaptativeTextFields(
-                controller: _valueController, 
-                label: 'Valor R\$', 
+                controller: _valueController,
+                label: 'Valor R\$',
                 onSubmitForms: (_) => _submitForms(),
-                keyboardType: keyboardTypeNumber, 
+                keyboardType: keyboardTypeNumber,
               ),
-              Container(
-                height: 70,
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: Text(
-                        _selectedDate == null
-                            ? 'Nenhuma data selecionada!'
-                            : 'Data selecionada: ${DateFormat('dd/MM/y').format(_selectedDate!)}',
-                      ),
-                    ),
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        foregroundColor: Theme.of(context).colorScheme.primary,
-                      ),
-                      onPressed: _showDatePicker,
-                      child: Text('Selecionar data'),
-                    ),
-                  ],
-                ),
+              AdaptativeDatePicker(
+                selectedDate: _selectedDate,
+                onDateChanged: (newDate) {
+                  setState(() {
+                    _selectedDate = newDate;
+                  });
+                },
               ),
               SizedBox(height: 10),
               AdaptativeButton(
