@@ -1,4 +1,5 @@
 import 'package:expensivesapp/components/adaptative_button.dart';
+import 'package:expensivesapp/components/adaptative_text_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -20,7 +21,7 @@ class _TransactionsFormsState extends State<TransactionsForms> {
     final title = _titleController.text;
     final value = double.tryParse(_valueController.text) ?? 0.0;
 
-    if (title.isEmpty || value <= 0 || _selectedDate == null)  {
+    if (title.isEmpty || value <= 0 || _selectedDate == null) {
       return;
     }
 
@@ -43,6 +44,8 @@ class _TransactionsFormsState extends State<TransactionsForms> {
     });
   }
 
+  final keyboardTypeNumber = TextInputType.numberWithOptions(decimal: true);
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -57,16 +60,16 @@ class _TransactionsFormsState extends State<TransactionsForms> {
           ),
           child: Column(
             children: <Widget>[
-              TextField(
+              AdaptativeTextFields(
                 controller: _titleController,
-                onSubmitted: (_) => _submitForms(),
-                decoration: InputDecoration(labelText: 'Título'),
+                label: 'Título',
+                onSubmitForms: (_) => _submitForms(),
               ),
-              TextField(
-                controller: _valueController,
-                onSubmitted: (_) => _submitForms(),
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
-                decoration: InputDecoration(labelText: 'Valor (R\$)'),
+              AdaptativeTextFields(
+                controller: _valueController, 
+                label: 'Valor R\$', 
+                onSubmitForms: (_) => _submitForms(),
+                keyboardType: keyboardTypeNumber, 
               ),
               Container(
                 height: 70,
@@ -74,8 +77,9 @@ class _TransactionsFormsState extends State<TransactionsForms> {
                   children: <Widget>[
                     Expanded(
                       child: Text(
-                        _selectedDate == null ? 'Nenhuma data selecionada!'
-                        : 'Data selecionada: ${DateFormat('dd/MM/y').format(_selectedDate!)}'
+                        _selectedDate == null
+                            ? 'Nenhuma data selecionada!'
+                            : 'Data selecionada: ${DateFormat('dd/MM/y').format(_selectedDate!)}',
                       ),
                     ),
                     TextButton(
@@ -89,7 +93,10 @@ class _TransactionsFormsState extends State<TransactionsForms> {
                 ),
               ),
               SizedBox(height: 10),
-              AdaptativeButton(label: 'Nova Transação', onPressed: _submitForms)
+              AdaptativeButton(
+                label: 'Nova Transação',
+                onPressed: _submitForms,
+              ),
             ],
           ),
         ),
