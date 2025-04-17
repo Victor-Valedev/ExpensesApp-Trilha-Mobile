@@ -14,7 +14,7 @@ class TransactionsForms extends StatefulWidget {
 class _TransactionsFormsState extends State<TransactionsForms> {
   final _titleController = TextEditingController();
   final _valueController = TextEditingController();
-  DateTime _selectedDate = DateTime.now();
+  DateTime? _selectedDate;
 
   _submitForms() {
     final title = _titleController.text;
@@ -24,7 +24,7 @@ class _TransactionsFormsState extends State<TransactionsForms> {
       return;
     }
 
-    widget.onSubmit(title, value, _selectedDate);
+    widget.onSubmit(title, value, _selectedDate!);
   }
 
   _showDatePicker() {
@@ -79,11 +79,11 @@ class _TransactionsFormsState extends State<TransactionsForms> {
                       ),
                     ),
                     TextButton(
-                      child: Text('Selecionar data'),
                       style: TextButton.styleFrom(
                         foregroundColor: Theme.of(context).colorScheme.primary,
                       ),
                       onPressed: _showDatePicker,
+                      child: Text('Selecionar data'),
                     ),
                   ],
                 ),
